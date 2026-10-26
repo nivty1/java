@@ -1,0 +1,38 @@
+```java
+import java.util.Scanner;
+
+class Tester {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        String inStr = sc.next();
+
+        long decodedLength = 0;
+        int index = 0;
+
+        while (index < inStr.length()) {
+
+            // Skip the letter
+            index++;
+
+            long count = 0;
+
+            // Read the digits following the letter
+            while (index < inStr.length()
+                    && Character.isDigit(inStr.charAt(index))) {
+
+                count = count * 10 + (inStr.charAt(index) - '0');
+                index++;
+            }
+
+            decodedLength += count;
+        }
+
+        System.out.println(decodedLength);
+
+        sc.close();
+    }
+}
+```
