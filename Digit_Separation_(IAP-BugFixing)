@@ -1,0 +1,54 @@
+
+import java.util.Scanner;
+
+class Tester {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        int size = sc.nextInt();
+
+        int[] inArr = new int[size];
+
+        for (int i = 0; i < size; i++) {
+            inArr[i] = sc.nextInt();
+        }
+
+        int noOfDigits = 0;
+
+        for (int num : inArr) {
+            int temp = num;
+
+            while (temp > 0) {
+                noOfDigits++;
+                temp /= 10;
+            }
+        }
+
+        int[] outArr = new int[noOfDigits];
+        int index = 0;
+
+        for (int i = 0; i < inArr.length; i++) {
+
+            int num = inArr[i];
+            int divisor = 1;
+
+            while (num / divisor >= 10) {
+                divisor *= 10;
+            }
+
+            while (divisor > 0) {
+                outArr[index++] = num / divisor;
+                num %= divisor;
+                divisor /= 10;
+            }
+        }
+
+        for (int num : outArr) {
+            System.out.println(num);
+        }
+
+        sc.close();
+    }
+}
