@@ -1,0 +1,49 @@
+
+import java.util.Scanner;
+
+class MyCode {
+
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+
+        int size = scanner.nextInt();
+
+        int[] inArr1 = new int[size];
+        int[] inArr2 = new int[size];
+
+        for (int i = 0; i < size; i++) {
+            inArr1[i] = scanner.nextInt();
+        }
+
+        for (int i = 0; i < size; i++) {
+            inArr2[i] = scanner.nextInt();
+        }
+
+        int[] outArr = new int[size];
+        int index = 0;
+
+        if (inArr1[0] % 2 == 0) {
+
+            for (int i = 0; i < size; i++) {
+
+                for (int j = 0; j < size; j++) {
+
+                    if (inArr1[i] == inArr2[j]) {
+                        outArr[index++] = inArr1[i];
+                        break;
+                    }
+                }
+            }
+
+        } else {
+            outArr[index++] = 1;
+        }
+
+        for (int i = 0; i < index; i++) {
+            System.out.println(outArr[i]);
+        }
+
+        scanner.close();
+    }
+}
