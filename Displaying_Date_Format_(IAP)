@@ -1,0 +1,123 @@
+
+import java.util.Scanner;
+
+class Tester {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        int inputDate[] = new int[3];
+
+        for (int i = 0; i < inputDate.length; i++) {
+            inputDate[i] = sc.nextInt();
+        }
+
+        int val = inputDate[0];     // Day
+        int month = inputDate[1];   // Month
+        int year = inputDate[2];    // Year
+
+        String ordinal = "";
+        String monthArr[] = {
+            "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+        };
+
+        // Validate month and year
+        if (month < 1 || month > 12 || year < 1000 || year > 9999) {
+            System.out.println("Invalid");
+            sc.close();
+            return;
+        }
+
+        // Check leap year
+        boolean leapYear = (year % 4 == 0 && year % 100 != 0)
+                           || (year % 400 == 0);
+
+        // Find maximum days in the given month
+        int maxDays;
+
+        if (month == 2) {
+            maxDays = leapYear ? 29 : 28;
+        } else if (month == 4 || month == 6 ||
+                   month == 9 || month == 11) {
+            maxDays = 30;
+        } else {
+            maxDays = 31;
+        }
+
+        // Validate day
+        if (val < 1 || val > maxDays) {
+            System.out.println("Invalid");
+            sc.close();
+            return;
+        }
+
+        // Find ordinal suffix
+        if (val % 100 >= 11 && val % 100 <= 13) {
+            ordinal = val + "th";
+        } else {
+            switch (val % 10) {
+                case 1:
+                    ordinal = val + "st";
+                    break;
+                case 2:
+                    ordinal = val + "nd";
+                    break;
+                case 3:
+                    ordinal = val + "rd";
+                    break;
+                default:
+                    ordinal = val + "th";
+            }
+        }
+
+        // Zeller's Congruence
+        int q = val;
+        int m = month;
+        int y = year;
+
+        if (m == 1 || m == 2) {
+            m += 12;
+            y--;
+        }
+
+        int K = y % 100;
+        int J = y / 100;
+
+        int h = (q + (13 * (m + 1)) / 5
+                 + K + K / 4 + J / 4 + 5 * J) % 7;
+
+        String dayName = "";
+
+        switch (h) {
+            case 0:
+                dayName = "Saturday";
+                break;
+            case 1:
+                dayName = "Sunday";
+                break;
+            case 2:
+                dayName = "Monday";
+                break;
+            case 3:
+                dayName = "Tuesday";
+                break;
+            case 4:
+                dayName = "Wednesday";
+                break;
+            case 5:
+                dayName = "Thursday";
+                break;
+            case 6:
+                dayName = "Friday";
+                break;
+        }
+
+        // Display the date and day of the week
+        System.out.println(ordinal + " " + monthArr[month - 1] + " " + year);
+        System.out.println(dayName);
+
+        sc.close();
+    }
+}
