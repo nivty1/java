@@ -1,0 +1,45 @@
+class Tester {
+
+	public static int[] findNumbers(int num1, int num2) {
+		int[] numbers = new int[6];
+
+		// Validate that num1 should be less than num2
+		if (num1 < num2) {
+			int index = 0;
+			// Loop through numbers between num1 and num2
+			for (int i = num1 + 1; i < num2; i++) {
+				// Check if it is a 2-digit positive number (10 to 99)
+				if (i >= 10 && i <= 99) {
+					int sumOfDigits = (i / 10) + (i % 10);
+					
+					// Condition: sum of digits is a multiple of 3 AND number is a multiple of 5
+					if (sumOfDigits % 3 == 0 && i % 5 == 0) {
+						if (index < numbers.length) {
+							numbers[index] = i;
+							index++;
+						}
+					}
+				}
+			}
+		}
+
+		return numbers;
+	}
+
+	public static void main(String[] args) {
+		int num1 = 10;
+		int num2 = 30;
+
+		int[] numbers = findNumbers(num1, num2);
+		if (numbers[0] == 0) {
+			System.out.println("There is no such number!");
+		} else {
+			for (int index = 0; index <= numbers.length - 1; index++) {
+				if (numbers[index] == 0) {
+					break;
+				}
+				System.out.println(numbers[index]);
+			}
+		}
+	}
+}
