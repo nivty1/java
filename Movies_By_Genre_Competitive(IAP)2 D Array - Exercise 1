@@ -1,0 +1,56 @@
+
+import java.util.Scanner;
+
+class Tester {
+
+    public static void main(String[] args) {
+
+        String[][] movieArr = new String[2][3];
+        String genre = "";
+
+        Scanner sc = new Scanner(System.in);
+
+        // Input movie names and genres
+        for (int index = 0; index < 2; index++) {
+            for (int j = 0; j < 3; j++) {
+                movieArr[index][j] = sc.next();
+            }
+        }
+
+        // Input genre
+        genre = sc.next();
+
+        int movieCount = displayMovieDetails(movieArr, genre);
+
+        System.out.println("Count of movies with genre " + genre + "=" + movieCount);
+
+        sc.close();
+    }
+
+    public static int displayMovieDetails(String[][] movieArr, String genre) {
+
+        int counter = 0;
+        String result = "";
+
+        for (int i = 0; i < movieArr[0].length; i++) {
+
+            if (movieArr[1][i].equals(genre)) {
+
+                if (counter > 0) {
+                    result += "$";
+                }
+
+                result += movieArr[0][i];
+                counter++;
+            }
+        }
+
+        if (counter > 0) {
+            System.out.println("Movies=" + result);
+        } else {
+            System.out.println("Movies=NA");
+        }
+
+        return counter;
+    }
+}
